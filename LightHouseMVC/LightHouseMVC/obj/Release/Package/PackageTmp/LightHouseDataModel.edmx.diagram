@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7a78a009afa14d8783db9533ea3e9117" Name="Diagram1">
+        <EntityTypeShape EntityType="LightHouseDatabaseModel.Parent_Profile" Width="1.5" PointX="3" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="LightHouseDatabaseModel.School_Profile" Width="1.5" PointX="0.75" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="LightHouseDatabaseModel.Student_Profile" Width="1.5" PointX="3" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="LightHouseDatabaseModel.Teacher_Profile" Width="1.5" PointX="3" PointY="8.875" IsExpanded="true" />
+        <AssociationConnector Association="LightHouseDatabaseModel.FK_Parent_Profile_School_Profile" ManuallyRouted="false" />
+        <AssociationConnector Association="LightHouseDatabaseModel.FK_Student_Profile_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="LightHouseDatabaseModel.FK_Teacher_Profile_School_Profile" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

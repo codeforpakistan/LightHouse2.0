@@ -1,0 +1,101 @@
+﻿@model LightHouseMVC.Parent_Profile
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>Parent_Profile</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.CNIC_No)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.CNIC_No)
+            @Html.ValidationMessageFor(model => model.CNIC_No)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Username)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Username)
+            @Html.ValidationMessageFor(model => model.Username)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email_ID)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email_ID)
+            @Html.ValidationMessageFor(model => model.Email_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Password_MD5)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Password_MD5)
+            @Html.ValidationMessageFor(model => model.Password_MD5)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.School_ID, "School_Profile")
+        </div>
+        <div class="editor-field">
+            @Html.DropDownList("School_ID", String.Empty)
+            @Html.ValidationMessageFor(model => model.School_ID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.School_Name)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.School_Name)
+            @Html.ValidationMessageFor(model => model.School_Name)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Phone_No)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Phone_No)
+            @Html.ValidationMessageFor(model => model.Phone_No)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Registered_Kids)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Registered_Kids)
+            @Html.ValidationMessageFor(model => model.Registered_Kids)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Postal_Address)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Postal_Address)
+            @Html.ValidationMessageFor(model => model.Postal_Address)
+        </div>
+
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

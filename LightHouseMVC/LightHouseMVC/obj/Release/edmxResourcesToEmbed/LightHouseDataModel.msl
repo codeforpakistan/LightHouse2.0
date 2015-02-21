@@ -1,0 +1,70 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="LightHouseDatabaseModelStoreContainer" CdmEntityContainer="LightHouseDatabaseEntities">
+    <EntitySetMapping Name="Parent_Profile">
+      <EntityTypeMapping TypeName="LightHouseDatabaseModel.Parent_Profile">
+        <MappingFragment StoreEntitySet="Parent_Profile">
+          <ScalarProperty Name="CNIC_No" ColumnName="CNIC_No" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+          <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+          <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+          <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+          <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+          <ScalarProperty Name="Registered_Kids" ColumnName="Registered_Kids" />
+          <ScalarProperty Name="Postal_Address" ColumnName="Postal_Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="School_Profile">
+      <EntityTypeMapping TypeName="LightHouseDatabaseModel.School_Profile">
+        <MappingFragment StoreEntitySet="School_Profile">
+          <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+          <ScalarProperty Name="SchoolAdmin_username" ColumnName="SchoolAdmin_username" />
+          <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+          <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+          <ScalarProperty Name="School_Branches" ColumnName="School_Branches" />
+          <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+          <ScalarProperty Name="CNIC_No" ColumnName="CNIC_No" />
+          <ScalarProperty Name="School_Type" ColumnName="School_Type" />
+          <ScalarProperty Name="Teachers" ColumnName="Teachers" />
+          <ScalarProperty Name="Class_Rooms" ColumnName="Class_Rooms" />
+          <ScalarProperty Name="Students" ColumnName="Students" />
+          <ScalarProperty Name="Postal_Address" ColumnName="Postal_Address" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Student_Profile">
+      <EntityTypeMapping TypeName="LightHouseDatabaseModel.Student_Profile">
+        <MappingFragment StoreEntitySet="Student_Profile">
+          <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+          <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="School_Roll_Number" ColumnName="School_Roll_Number" />
+          <ScalarProperty Name="NFC_Student_ID" ColumnName="NFC_Student_ID" />
+          <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+          <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+          <ScalarProperty Name="Parent_CNIC" ColumnName="Parent_CNIC" />
+          <ScalarProperty Name="Parent_Name" ColumnName="Parent_Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Teacher_Profile">
+      <EntityTypeMapping TypeName="LightHouseDatabaseModel.Teacher_Profile">
+        <MappingFragment StoreEntitySet="Teacher_Profile">
+          <ScalarProperty Name="Teacher_ID" ColumnName="Teacher_ID" />
+          <ScalarProperty Name="Picture" ColumnName="Picture" />
+          <ScalarProperty Name="Username" ColumnName="Username" />
+          <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+          <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+          <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+          <ScalarProperty Name="NFC_Teacher_ID" ColumnName="NFC_Teacher_ID" />
+          <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+          <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+          <ScalarProperty Name="Results" ColumnName="Results" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

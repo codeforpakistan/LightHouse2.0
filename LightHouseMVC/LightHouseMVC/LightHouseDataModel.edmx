@@ -1,0 +1,343 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="LightHouseDatabaseModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Parent_Profile">
+          <Key>
+            <PropertyRef Name="CNIC_No" />
+          </Key>
+          <Property Name="CNIC_No" Type="int" Nullable="false" />
+          <Property Name="Username" Type="varchar" MaxLength="250" />
+          <Property Name="Email_ID" Type="varchar" MaxLength="250" />
+          <Property Name="Password_MD5" Type="varchar" MaxLength="250" />
+          <Property Name="School_ID" Type="int" Nullable="false" />
+          <Property Name="School_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Phone_No" Type="varchar" MaxLength="250" />
+          <Property Name="Registered_Kids" Type="varchar" MaxLength="250" />
+          <Property Name="Postal_Address" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="School_Profile">
+          <Key>
+            <PropertyRef Name="School_ID" />
+          </Key>
+          <Property Name="School_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SchoolAdmin_username" Type="varchar" MaxLength="250" />
+          <Property Name="School_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Password_MD5" Type="varchar" MaxLength="250" />
+          <Property Name="School_Branches" Type="varchar" MaxLength="250" />
+          <Property Name="Phone_No" Type="varchar" MaxLength="250" />
+          <Property Name="CNIC_No" Type="varchar" MaxLength="250" />
+          <Property Name="School_Type" Type="varchar" MaxLength="250" />
+          <Property Name="Teachers" Type="varchar" MaxLength="250" />
+          <Property Name="Class_Rooms" Type="varchar" MaxLength="250" />
+          <Property Name="Students" Type="varchar" MaxLength="250" />
+          <Property Name="Postal_Address" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Student_Profile">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="School_ID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="250" />
+          <Property Name="Picture" Type="image" />
+          <Property Name="School_Roll_Number" Type="varchar" MaxLength="250" Nullable="false" />
+          <Property Name="NFC_Student_ID" Type="varchar" MaxLength="250" />
+          <Property Name="Subjects" Type="varchar" MaxLength="250" />
+          <Property Name="Date_Of_Birth" Type="date" />
+          <Property Name="Parent_CNIC" Type="int" Nullable="false" />
+          <Property Name="Parent_Name" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Teacher_Profile">
+          <Key>
+            <PropertyRef Name="Teacher_ID" />
+          </Key>
+          <Property Name="Teacher_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Picture" Type="varchar" MaxLength="250" />
+          <Property Name="Username" Type="varchar" MaxLength="250" />
+          <Property Name="Password_MD5" Type="varchar" MaxLength="250" />
+          <Property Name="School_Name" Type="varchar" MaxLength="250" />
+          <Property Name="Email_ID" Type="varchar" MaxLength="250" />
+          <Property Name="NFC_Teacher_ID" Type="varchar" MaxLength="250" />
+          <Property Name="School_ID" Type="int" Nullable="false" />
+          <Property Name="Subjects" Type="varchar" MaxLength="250" />
+          <Property Name="Results" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <Association Name="FK_Parent_Profile_School_Profile">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Parent_Profile" Type="Self.Parent_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Parent_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Profile_ToTable">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Student_Profile" Type="Self.Student_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Student_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Profile_School_Profile">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Teacher_Profile" Type="Self.Teacher_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Teacher_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LightHouseDatabaseModelStoreContainer">
+          <EntitySet Name="Parent_Profile" EntityType="Self.Parent_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="School_Profile" EntityType="Self.School_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student_Profile" EntityType="Self.Student_Profile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teacher_Profile" EntityType="Self.Teacher_Profile" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Parent_Profile_School_Profile" Association="Self.FK_Parent_Profile_School_Profile">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Parent_Profile" EntitySet="Parent_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Profile_ToTable" Association="Self.FK_Student_Profile_ToTable">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Student_Profile" EntitySet="Student_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Profile_School_Profile" Association="Self.FK_Teacher_Profile_School_Profile">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Teacher_Profile" EntitySet="Teacher_Profile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="LightHouseDatabaseModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Parent_Profile">
+          <Key>
+            <PropertyRef Name="CNIC_No" />
+          </Key>
+          <Property Name="CNIC_No" Type="Int32" Nullable="false" />
+          <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password_MD5" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_ID" Type="Int32" Nullable="false" />
+          <Property Name="School_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_No" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Registered_Kids" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="School_Profile" Relationship="Self.FK_Parent_Profile_School_Profile" FromRole="Parent_Profile" ToRole="School_Profile" />
+        </EntityType>
+        <EntityType Name="School_Profile">
+          <Key>
+            <PropertyRef Name="School_ID" />
+          </Key>
+          <Property Name="School_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SchoolAdmin_username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password_MD5" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_Branches" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Phone_No" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CNIC_No" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_Type" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Teachers" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Class_Rooms" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Students" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Postal_Address" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Parent_Profile" Relationship="Self.FK_Parent_Profile_School_Profile" FromRole="School_Profile" ToRole="Parent_Profile" />
+          <NavigationProperty Name="Student_Profile" Relationship="Self.FK_Student_Profile_ToTable" FromRole="School_Profile" ToRole="Student_Profile" />
+          <NavigationProperty Name="Teacher_Profile" Relationship="Self.FK_Teacher_Profile_School_Profile" FromRole="School_Profile" ToRole="Teacher_Profile" />
+        </EntityType>
+        <EntityType Name="Student_Profile">
+          <Key>
+            <PropertyRef Name="Student_ID" />
+          </Key>
+          <Property Name="Student_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="School_ID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Picture" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <Property Name="School_Roll_Number" Type="String" MaxLength="250" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="NFC_Student_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Subjects" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Date_Of_Birth" Type="DateTime" Precision="0" />
+          <Property Name="Parent_CNIC" Type="Int32" Nullable="false" />
+          <Property Name="Parent_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="School_Profile" Relationship="Self.FK_Student_Profile_ToTable" FromRole="Student_Profile" ToRole="School_Profile" />
+        </EntityType>
+        <EntityType Name="Teacher_Profile">
+          <Key>
+            <PropertyRef Name="Teacher_ID" />
+          </Key>
+          <Property Name="Teacher_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Picture" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Username" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Password_MD5" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_Name" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Email_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="NFC_Teacher_ID" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="School_ID" Type="Int32" Nullable="false" />
+          <Property Name="Subjects" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="Results" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="School_Profile" Relationship="Self.FK_Teacher_Profile_School_Profile" FromRole="Teacher_Profile" ToRole="School_Profile" />
+        </EntityType>
+        <Association Name="FK_Parent_Profile_School_Profile">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Parent_Profile" Type="Self.Parent_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Parent_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Student_Profile_ToTable">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Student_Profile" Type="Self.Student_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Student_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Teacher_Profile_School_Profile">
+          <End Role="School_Profile" Type="Self.School_Profile" Multiplicity="1" />
+          <End Role="Teacher_Profile" Type="Self.Teacher_Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="School_Profile">
+              <PropertyRef Name="School_ID" />
+            </Principal>
+            <Dependent Role="Teacher_Profile">
+              <PropertyRef Name="School_ID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LightHouseDatabaseEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Parent_Profile" EntityType="Self.Parent_Profile" />
+          <EntitySet Name="School_Profile" EntityType="Self.School_Profile" />
+          <EntitySet Name="Student_Profile" EntityType="Self.Student_Profile" />
+          <EntitySet Name="Teacher_Profile" EntityType="Self.Teacher_Profile" />
+          <AssociationSet Name="FK_Parent_Profile_School_Profile" Association="Self.FK_Parent_Profile_School_Profile">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Parent_Profile" EntitySet="Parent_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Student_Profile_ToTable" Association="Self.FK_Student_Profile_ToTable">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Student_Profile" EntitySet="Student_Profile" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Teacher_Profile_School_Profile" Association="Self.FK_Teacher_Profile_School_Profile">
+            <End Role="School_Profile" EntitySet="School_Profile" />
+            <End Role="Teacher_Profile" EntitySet="Teacher_Profile" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="LightHouseDatabaseModelStoreContainer" CdmEntityContainer="LightHouseDatabaseEntities">
+          <EntitySetMapping Name="Parent_Profile">
+            <EntityTypeMapping TypeName="LightHouseDatabaseModel.Parent_Profile">
+              <MappingFragment StoreEntitySet="Parent_Profile">
+                <ScalarProperty Name="CNIC_No" ColumnName="CNIC_No" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+                <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+                <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+                <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="Registered_Kids" ColumnName="Registered_Kids" />
+                <ScalarProperty Name="Postal_Address" ColumnName="Postal_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="School_Profile">
+            <EntityTypeMapping TypeName="LightHouseDatabaseModel.School_Profile">
+              <MappingFragment StoreEntitySet="School_Profile">
+                <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+                <ScalarProperty Name="SchoolAdmin_username" ColumnName="SchoolAdmin_username" />
+                <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+                <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+                <ScalarProperty Name="School_Branches" ColumnName="School_Branches" />
+                <ScalarProperty Name="Phone_No" ColumnName="Phone_No" />
+                <ScalarProperty Name="CNIC_No" ColumnName="CNIC_No" />
+                <ScalarProperty Name="School_Type" ColumnName="School_Type" />
+                <ScalarProperty Name="Teachers" ColumnName="Teachers" />
+                <ScalarProperty Name="Class_Rooms" ColumnName="Class_Rooms" />
+                <ScalarProperty Name="Students" ColumnName="Students" />
+                <ScalarProperty Name="Postal_Address" ColumnName="Postal_Address" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Student_Profile">
+            <EntityTypeMapping TypeName="LightHouseDatabaseModel.Student_Profile">
+              <MappingFragment StoreEntitySet="Student_Profile">
+                <ScalarProperty Name="Student_ID" ColumnName="Student_ID" />
+                <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="School_Roll_Number" ColumnName="School_Roll_Number" />
+                <ScalarProperty Name="NFC_Student_ID" ColumnName="NFC_Student_ID" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+                <ScalarProperty Name="Date_Of_Birth" ColumnName="Date_Of_Birth" />
+                <ScalarProperty Name="Parent_CNIC" ColumnName="Parent_CNIC" />
+                <ScalarProperty Name="Parent_Name" ColumnName="Parent_Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teacher_Profile">
+            <EntityTypeMapping TypeName="LightHouseDatabaseModel.Teacher_Profile">
+              <MappingFragment StoreEntitySet="Teacher_Profile">
+                <ScalarProperty Name="Teacher_ID" ColumnName="Teacher_ID" />
+                <ScalarProperty Name="Picture" ColumnName="Picture" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password_MD5" ColumnName="Password_MD5" />
+                <ScalarProperty Name="School_Name" ColumnName="School_Name" />
+                <ScalarProperty Name="Email_ID" ColumnName="Email_ID" />
+                <ScalarProperty Name="NFC_Teacher_ID" ColumnName="NFC_Teacher_ID" />
+                <ScalarProperty Name="School_ID" ColumnName="School_ID" />
+                <ScalarProperty Name="Subjects" ColumnName="Subjects" />
+                <ScalarProperty Name="Results" ColumnName="Results" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
